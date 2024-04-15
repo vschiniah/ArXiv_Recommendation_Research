@@ -14,6 +14,10 @@ def reorganize_csv(input_file, output_dir, group_by_column):
     for chunk in tqdm(reader, desc="Processing chunks"):
         # Group the chunk by the specified column
         grouped = chunk.groupby(group_by_column)
+        grouped_file = f"grouped_data{chunk}.csv"
+        grouped_path = os.path.join(output_dir, grouped_file)
+        grouped.to_csv(grouped_path)
+        print(f"Done grouping for {chunk}")
 
         # Iterate over the groups and append data to the dictionary
         for group_value, group_data in grouped:
@@ -34,6 +38,7 @@ def read_and_process_csv_files(folder_path, specific_files=None):
     for file in os.listdir(folder_path):
         if file.endswith('.csv') and (specific_files is None or file in specific_files):
             try:
+                print(f"Start processing for {file}")
                 reorganize_csv(file, folder_path, 'citingcorpusid')
                 print('successfully reorganized')
             except pd.errors.ParserError as e:
