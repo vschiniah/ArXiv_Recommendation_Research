@@ -5,7 +5,7 @@ import time
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from utils import extract_authors, preprocess_text
-from Scripts.model_eval_functions_v3 import rec_cited_author, rec_referenced_by_author
+from model_evaluation import rec_cited_author, rec_referenced_by_author
 
 start_time = time.perf_counter()
 
@@ -135,9 +135,9 @@ def recommend_for_authors(authors_list, train_data, test_data=None, tfidf_matrix
     return all_recommendations, scores_df
 
 
-references_df = pd.read_csv('../papers_and_authors.csv')
-pulled_references = pd.read_csv('../pulled_references.csv')
-pulled_citations = pd.read_csv('../pulled_citations.csv')
+pulled_references = pd.read_csv('./Data/pulled_references.csv')
+pulled_citations = pd.read_csv('./Data/pulled_citations.csv')
+references_df = pd.read_csv('./Data/papers_and_authors.csv')
 num_authors_to_select = min(1000, len(unique_full_names))
 authors_list = random.sample(sorted(unique_full_names), num_authors_to_select)
 
