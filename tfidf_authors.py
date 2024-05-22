@@ -13,7 +13,7 @@ start_time = time.perf_counter()
 train_data = pd.read_csv('./Data/train_data.csv')
 
 #  Test Data
-test_data = pd.read_csv('./Data/test_data_s2.csv')
+test_data = pd.read_csv('./Data/test_data.csv')
 
 test_data['full_names'] = test_data['authors_parsed'].apply(extract_authors)
 all_full_names = sum(test_data['full_names'], [])

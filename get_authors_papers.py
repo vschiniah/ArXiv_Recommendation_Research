@@ -68,7 +68,7 @@ for (author_id, author_name), papers_list in authors_papers.items():
         rows.append(row)
 
 df_references = pd.DataFrame(rows)
-output_csv_path = 'papers_and_authors.csv'
+output_csv_path = './Data/papers_and_authors.csv'
 df_references.to_csv(output_csv_path, index=False)
 
 print(f"Saved references to {output_csv_path}")

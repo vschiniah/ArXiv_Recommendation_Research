@@ -32,7 +32,7 @@ def get_papers(recommendations):
         'Content-Type': 'application/json'
     }
 
-    # Initialize list to store paper data
+
     lm_papers = []
     lm_arxiv_ids = [f'arXiv:{id}' for id in recommendations['id']]
     lm_arxiv_title = [f'title:{id}' for id in recommendations['title']]
@@ -59,15 +59,14 @@ def get_papers(recommendations):
             print("Status Code:", response.status_code)
             print("Response:", response.text)
 
-    # Convert the list of papers into a DataFrame
     lm_s2_df = pd.DataFrame.from_records(lm_papers)
     lm_s2_df = lm_s2_df.rename(columns={'paperId': 's2PaperId'}).set_index('id').reset_index()
     combined = pd.merge(recommendations, lm_s2_df, on='title', how='left')
     return combined
 
 
-data_df = pd.read_csv("/Data/arxiv_data.csv")
+data_df = pd.read_csv("/Data/test_data.csv")
 data_s2 = get_papers(data_df)
 data_s2 = data_s2.dropna(subset=['corpusId'])
 data_s2 = data_s2.drop_duplicates(subset=['title'])
-data_s2.to_csv('test2.csv')
+

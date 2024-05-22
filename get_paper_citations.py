@@ -66,4 +66,4 @@ for (paper_id, corpus_id, paper_title), citations in papers_citations.items():
         })
 
 pulled_citations = pd.DataFrame(rows)
-pulled_citations.to_csv('pulled_citations.csv')
+pulled_citations.to_csv('./Data/pulled_citations.csv')

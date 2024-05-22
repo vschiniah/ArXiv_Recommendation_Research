@@ -6,7 +6,6 @@ from nltk.stem import WordNetLemmatizer
 nltk.download('wordnet')
 
 
-# TODO: Function to preprocess text
 def preprocess_text(text, stopwords):
     """
     Preprocesses text by removing stopwords and lemmatizing words
