@@ -1,5 +1,6 @@
 # User-Item Fairness Tradeoffs in Recommendations
 
+
 ## Overview
 This repository houses the source code for a research project aimed at exploring user-item fairness tradeoffs in recommendation systems. The project encompasses both theoretical frameworks and empirical evaluations to assess and improve fairness in recommendations.
 
@@ -12,7 +13,7 @@ This repository houses the source code for a research project aimed at exploring
 - **import_metadata.py**: Script for importing and processing metadata from Kaggle.
 - **model_evaluation.py**: Contains functions to evaluate the recommendation model.
 - **requirements.txt**: Lists all the dependencies required to run the scripts.
-- - **tfidf_authors.py**: Get recommendations using Sentence Transformer and cosine similarity.
+- **sentence_transformer_authors.py**: Get recommendations using Sentence Transformer and cosine similarity.
 - **stopwords.txt**: Text file containing stopwords used in text processing.
 - **tfidf_authors.py**: Get recommendations using TF-IDF embeddings and cosine similarity.
 - **utils.py**: Utility functions used across the project.
