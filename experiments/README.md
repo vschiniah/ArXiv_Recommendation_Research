@@ -52,6 +52,6 @@ Parameters:
 - `beta`: proportion of the population to be correctly estimated
 - `df`: location of data source file:
     - data should be a dictionary with two entries, "authors" and "papers"
-    - "authors": list of dictionaries each representing an author's data. Each dictionary must have a field "embedding", which is a list of the embeddings of the author's papers.
+    - "authors": list of dictionaries each representing an author's data. Each dictionary must have a field "embedding", which is a matrix of the embeddings of the author's papers (papers x embedding dimension).
     - "papers": matrix of paper embeddings (papers x embedding dimension)
 - `ff`: place to save plot image
