@@ -97,6 +97,7 @@ def recommend_for_authors(authors_list, train_data, test_data=None,tfidf_matrix_
 pulled_references = pd.read_csv('./Data/all_pulled_references_s2.csv')
 pulled_citations = pd.read_csv('./Data/all_pulled_citations_s2.csv')
 references_df = pd.read_csv('./Data/all_papers_and_authors_s2.csv')
+## Removed these for GitHub
 authors_list_1 = []
 authors_list_2 = []
 combined_auth_list = authors_list_1 + authors_list_2
