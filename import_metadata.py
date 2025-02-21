@@ -1,27 +1,20 @@
 import pandas as pd
 import json
 import os
-from tqdm.notebook import tqdm
+from tqdm import tqdm
 
 
 def get_metadata():
-    with open('research/arxiv-metadata-oai-snapshot.json') as f:
+    with open('Data/arxiv-metadata-oai-snapshot.json') as f:
         for line in f:
             yield line
 
 
-for dirname, _, filenames in os.walk('/kaggle/input'):
-    for filename in filenames:
-        print(os.path.join(dirname, filename))
-
 metadata = get_metadata()
 
-for paper in metadata:
-    first_paper = json.loads(paper)
-    break
-
-for key in first_paper:
-    print(key)
+# Initialize the progress bar with the exact total number of items
+total_items = 2666751 # length of metadata known!
+progress_bar = tqdm(metadata, total=total_items)
 
 ids = []
 submitter = []
@@ -38,29 +31,28 @@ versions = []
 update_date = []
 authors_parsed = []
 
-metadata = get_metadata()
-total_items = 0
-
-for ind, paper in enumerate(metadata):
+for paper in progress_bar:
     paper = json.loads(paper)
-    total_items += 1
 
     ids.append(paper['id'])
     submitter.append(paper['submitter'])
     authors.append(paper['authors'])
     title.append(paper['title'])
-    comments.append(paper['comments'])
-    journal_ref.append(paper['journal-ref'])
-    doi.append(paper['doi'])
-    report_no.append(paper['report-no'])
+    comments.append(paper['comments'] if 'comments' in paper else None)
+    journal_ref.append(paper['journal-ref'] if 'journal-ref' in paper else None)
+    doi.append(paper['doi'] if 'doi' in paper else None)
+    report_no.append(paper['report-no'] if 'report-no' in paper else None)
     categories.append(paper['categories'])
-    license.append(paper['license'])
+    license.append(paper['license'] if 'license' in paper else None)
     abstract.append(paper['abstract'])
     versions.append(paper['versions'])
     update_date.append(paper['update_date'])
     authors_parsed.append(paper['authors_parsed'])
 
-print(f'Total number of items is: {total_items}')
+    # Update the progress description to show the current paper's ID
+    progress_bar.set_description(f"Processing ID: {paper['id']}")
+
+print(f'Total number of items processed: {len(ids)}')
 
 d = {
     'id': ids,
@@ -81,4 +73,4 @@ d = {
 
 df = pd.DataFrame(d)
 
-df.to_csv('arxiv_metadata_dataset.csv')
+df.to_csv('./Data/arxiv_metadata_dataset.csv', index=False)
